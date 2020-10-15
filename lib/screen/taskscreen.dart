@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todoo_flutter/widgets/tasks_list.dart';
+import 'add_task_screen.dart';
 
 class TasksScreen extends StatelessWidget {
   @override
@@ -10,6 +13,10 @@ class TasksScreen extends StatelessWidget {
         child: Icon(
           Icons.add,
         ),
+        onPressed: () {
+          showModalBottomSheet(
+              context: context, builder: (context) => AddTaskScreen());
+        },
       ),
       body: SafeArea(
         child: Column(
@@ -53,6 +60,7 @@ class TasksScreen extends StatelessWidget {
             ),
             Expanded(
               child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
                 //only shows up by having a child or set the dimension
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -60,6 +68,7 @@ class TasksScreen extends StatelessWidget {
                       topLeft: Radius.circular(10.0),
                       topRight: Radius.circular(10.0)),
                 ),
+                child: TaskList(),
               ),
             ),
           ],
