@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoo_flutter/models/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String newTaskTitle;
+
     return Container(
       color: Color(0xff757575),
       child: Container(
@@ -35,9 +39,8 @@ class AddTaskScreen extends StatelessWidget {
               autofocus: true,
               keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
-              onChanged: (value) {
-                //emailL = value;
-                //Do something with the user input.
+              onChanged: (newText) {
+                newTaskTitle = newText;
               },
               decoration: InputDecoration(
                 hintText: 'Add a new task..',
@@ -61,6 +64,9 @@ class AddTaskScreen extends StatelessWidget {
             FlatButton(
               focusColor: Colors.cyanAccent[800],
               color: Colors.cyanAccent[700],
+              padding: EdgeInsets.symmetric(
+                vertical: 16.0get ,
+              ),
               child: Text(
                 'Add Task',
                 style: TextStyle(
@@ -68,7 +74,10 @@ class AddTaskScreen extends StatelessWidget {
                   fontSize: 20.0,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Provider.of<TaskData>(context).addTask(newTaskTitle);
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
